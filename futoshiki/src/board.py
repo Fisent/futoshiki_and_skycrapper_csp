@@ -7,6 +7,12 @@ class Constraint:
         self.y_1 = y_1
         self.y_2 = y_2
 
+    def __eq__(self, other):
+        x = self.x_1 == other.x_1 and self.x_2 == other.x_2
+        y = self.y_1 == other.y_1 and self.y_2 == other.y_2
+        return x and y
+
+
 class Board:
     def __init__(self, matrix, constraints):
         self.matrix = matrix
