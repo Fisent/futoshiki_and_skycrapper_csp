@@ -1,4 +1,4 @@
-from .board import Constraint
+from src import Constraint
 
 
 data_file_prefix = 'test_data/'
@@ -15,7 +15,7 @@ letter_to_index_map = {
 def symbol_to_indexes(symbol):
     letter = symbol[0]
     number = int(symbol[1]) -1
-    return (number, letter_to_index_map[letter])
+    return number, letter_to_index_map[letter]
 
 
 # returns dict with keys: N, matrix, constraints

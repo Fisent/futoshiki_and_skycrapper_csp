@@ -12,7 +12,8 @@ D2;C2
 
 W pierwszej linijce znajduje się liczba N informująca o rozmiarze łamigłówki.
 Następnie pod linijką z napisem 'START:' znajduje się reprezentacja stanu początkowego planszy. W odpowiednich miejscach znajdują się wartości liczbowe od 1 do N. Miejsca te przyjmujemy za wypełnione. Jeżeli na miejscu znajduje się wartość 0 oznacza to, że pole jest puste i należy je wypełnić podczas rozwiązywania łamigłówki.
-Następną sekcją są linijki po linii "REL:", która informuje nas o relacjach między polami. WAŻNE! Każda zapisana tam relacja oznacza, że pierwsze (lewe) pole z pary jest mniejsze od drugiego (prawego) pola z pary. Rzędy oznaczane są kolejnymi literami alfabetu łacińskiego (począwszy od A), a kolumny kolejnymi liczbami naturalnymi (począwszy od 1).
+Następną sekcją są linijki po linii "REL:", która informuje nas o relacjach między polami.
+WAŻNE! Każda zapisana tam relacja oznacza, że pierwsze (lewe) pole z pary jest mniejsze od drugiego (prawego) pola z pary. Rzędy oznaczane są kolejnymi literami alfabetu łacińskiego (począwszy od A), a kolumny kolejnymi liczbami naturalnymi (począwszy od 1).
 
 Standarad plików Skyscrapper (przykład dla N=4):
 
