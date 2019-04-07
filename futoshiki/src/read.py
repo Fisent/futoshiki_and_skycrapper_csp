@@ -2,6 +2,20 @@ from .board import Constraint
 
 data_file_prefix = 'test_data/'
 
+letter_to_index_map = {
+    'A': 0,
+    'B': 1,
+    'C': 2,
+    'D': 3
+}
+
+
+def symbol_to_indexes(symbol):
+    letter = symbol.at(0)
+    number = int(symbol.at(1))
+    return (number, letter_to_index_map[letter])
+
+
 # returns dict with keys: N, matrix, constraints
 def read_problem(filename):
     f = open(data_file_prefix + filename)
