@@ -33,14 +33,15 @@ def create_expected_result_matrix():
 
 
 class BoardTestCase(unittest.TestCase):
-    def board_is_created(self):
+    def test_board_is_created(self):
         board = create_board()
         print(board.matrix[0][1])
         print(board)
 
-    def board_solves_problem(self):
+    def test_board_solves_problem(self):
         board = create_board()
         result_matrix = create_expected_result_matrix()
+        # self.assertEqual(board.matrix, result_matrix)
 
 
 if __name__ == '__main__':

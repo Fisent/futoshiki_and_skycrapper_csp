@@ -8,7 +8,6 @@ class Constraint:
         self.y_2 = y_2
 
 class Board:
-
     def __init__(self, matrix, constraints):
         self.matrix = matrix
         self.constraints = constraints
