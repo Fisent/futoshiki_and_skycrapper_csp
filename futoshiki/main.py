@@ -1,6 +1,6 @@
-from cli import run_cli
-from board import Board
-from read import read_problem
+from src import run_cli
+from src import Board
+from src import read_problem
 
 
 def main_cli():
