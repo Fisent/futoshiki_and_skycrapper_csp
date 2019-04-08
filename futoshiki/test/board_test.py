@@ -62,7 +62,6 @@ class BoardTestCase(unittest.TestCase):
         self.assertFalse(unsolved_board.win_check())
         self.assertTrue(solved_board.win_check())
 
-
     def test_board_solves_problem(self):
         pass
 

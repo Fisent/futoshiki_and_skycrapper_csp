@@ -1,3 +1,4 @@
 from .board import Board, Constraint
 from .read import read_problem, symbol_to_indexes
 from .cli import run_cli
+from .solution import Solution
