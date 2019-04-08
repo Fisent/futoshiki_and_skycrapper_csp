@@ -17,6 +17,14 @@ def create_board():
     return Board(matrix, constraints)
 
 
+def create_simple_board():
+    matrix = [
+        [1, 0],
+        [0, 0]
+    ]
+    return Board(matrix, [])
+
+
 def create_expected_result_matrix():
     matrix = [
         [4, 2, 3, 5, 1],
@@ -26,6 +34,12 @@ def create_expected_result_matrix():
         [5, 4, 1, 2, 3]
     ]
     return matrix
+
+
+simple_board_expected_result = [
+    [1, 2],
+    [2, 1]
+]
 
 
 class BoardTestCase(unittest.TestCase):
@@ -55,12 +69,28 @@ class BoardTestCase(unittest.TestCase):
         self.assertFalse(result)
         self.assertEqual(board.matrix[0][0], 1)
 
+    def test_board_checks_win_condition_simple(self):
+        matrix = simple_board_expected_result
+        solved_board = Board(matrix=matrix, constraints=[])
+        unsolved_board = create_simple_board()
+        self.assertFalse(unsolved_board.win_check())
+        self.assertTrue(solved_board.win_check())
+
     def test_board_checks_win_condition(self):
         matrix = create_expected_result_matrix()
         solved_board = Board(matrix=matrix, constraints=[])
         unsolved_board = create_board()
         self.assertFalse(unsolved_board.win_check())
         self.assertTrue(solved_board.win_check())
+
+    def test_board_undos_move(self):
+        board = create_board()
+        board.make_move(0, 0, 1)
+        board.undo_move()
+        self.assertEqual(board.matrix[0][0], 0)
+        board.make_move(4, 0, 1)
+        board.undo_move()
+        self.assertEqual(board.matrix[4][0], 5)
 
     def test_board_solves_problem(self):
         pass

@@ -23,6 +23,7 @@ class Board:
         self.N = len(matrix)
         self.matrix = matrix
         self.constraints = constraints
+        self.moves_stack = []
 
     def __repr__(self):
         out = ''
@@ -70,7 +71,7 @@ class Board:
         sanity = self.move_sanity_checks(x, y, value)
         rows_cols = self.move_rows_cols_check(x, y, value)
         constraints = self.move_constraints_check(x, y, value)
-        return sanity and rows_cols and constraints
+        return sanity and rows_cols and constraints or self.matrix[x][y] is value
 
     def win_check(self):
         won = True
@@ -83,5 +84,11 @@ class Board:
     def make_move(self, x, y, value):
         valid = self.is_move_valid(x, y, value)
         if valid:
+            self.moves_stack.append((x, y, self.matrix[x][y]))
             self.matrix[x][y] = value
         return valid
+
+    def undo_move(self):
+        print('undo move')
+        x, y, value = self.moves_stack.pop()
+        self.matrix[x][y] = value
