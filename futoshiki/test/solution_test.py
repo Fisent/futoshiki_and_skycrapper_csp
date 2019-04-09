@@ -17,6 +17,20 @@ def create_board_5():
     return Board(matrix, constraints)
 
 
+def create_board_3():
+    matrix = [
+        [2, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ]
+
+    constraints = [
+        Constraint(0, 0, 1, 0)
+    ]
+
+    return Board(matrix, constraints)
+
+
 def create_simple_board():
     matrix = [
         [1, 0],
@@ -31,6 +45,12 @@ def create_solution_5():
     return solution
 
 
+def create_solution_3():
+    board = create_board_3()
+    s = Solution(board)
+    return s
+
+
 def create_simple_solution():
     board = create_simple_board()
     s = Solution(board)
@@ -42,12 +62,20 @@ simple_board_expected_solution = [
     [2, 1]
 ]
 
+
 board_5_one_of_results = [
     [1, 4, 2, 3, 5],
     [4, 5, 1, 2, 3],
     [2, 3, 5, 1, 4],
     [3, 1, 4, 5, 2],
     [5, 2, 3, 4, 1]
+]
+
+
+board_3_one_of_results =[
+    [2, 1, 3],
+    [3, 2, 1],
+    [1, 3, 2]
 ]
 
 
@@ -84,6 +112,13 @@ class SolutionTestCase(unittest.TestCase):
         s = create_solution_5()
         results = s.solve()
         self.assertTrue(board_5_one_of_results in results)
+
+    def test_solution_solves_board_3(self):
+        s = create_solution_3()
+        results = s.solve()
+        self.assertTrue(board_3_one_of_results in results)
+        for s in results:
+            print(repr(s))
 
 
 if __name__ == '__main__':
