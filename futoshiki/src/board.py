@@ -19,11 +19,12 @@ class Constraint:
 
 
 class Board:
-    def __init__(self, matrix, constraints):
+    def __init__(self, matrix, constraints, name='bezimienny'):
         self.N = len(matrix)
         self.matrix = matrix
         self.constraints = constraints
         self.moves_stack = []
+        self.name = name
 
     def __repr__(self):
         out = ''
@@ -89,6 +90,6 @@ class Board:
         return valid
 
     def undo_move(self):
-        print('undo move')
+        # print('undo move')
         x, y, value = self.moves_stack.pop()
         self.matrix[x][y] = value

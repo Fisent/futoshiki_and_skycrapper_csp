@@ -8,7 +8,11 @@ letter_to_index_map = {
     'A': 0,
     'B': 1,
     'C': 2,
-    'D': 3
+    'D': 3,
+    'E': 4,
+    'F': 5,
+    'G': 6,
+    'H': 7
 }
 
 
@@ -50,5 +54,6 @@ def read_problem(filename):
     return {
         'N': N,
         'matrix': matrix,
-        'constraints': constraints
+        'constraints': constraints,
+        'name': filename
     }

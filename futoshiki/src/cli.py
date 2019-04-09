@@ -1,10 +1,23 @@
+from os import listdir, getcwd
+from src import read_problem, Board
+from .solution import Solution
 
 menu_options = 'Select option:\n' \
                '\tn - new game\n' \
+               '\ts = solve with AI\n' \
                '\tq - quit\n'
 
 
 prompt = '> '
+
+
+# loading available boards from test_data folder
+boards = []
+
+for filename in listdir(getcwd() + '/test_data'):
+    problem = read_problem(filename)
+    board = Board(matrix=problem['matrix'], constraints=problem['constraints'], name=problem['name'])
+    boards.append(board)
 
 
 def read_field():
@@ -22,6 +35,15 @@ def print_game_state(board):
     print(repr(board))
     for c in board.constraints:
         print(repr(c))
+
+
+def list_boards():
+    out = ''
+    if range(len(boards)) is 0:
+        print('Warning! There are no available boards!')
+    for i in range(len(boards)):
+        out += str(i) + ' - ' + boards[i].name + '\n'
+    return out
 
 
 def game(board):
@@ -47,6 +69,16 @@ def game(board):
                 return
 
 
+def solve():
+    option = int(input('Which board do you want to solve?\n' + list_boards() + prompt))
+    list_boards()
+    board = boards[option]
+    solution = Solution(board=board)
+    results = solution.solve()
+    for result in results:
+        print(repr(result))
+
+
 def run_cli(board):
     running = True
     print('Welcome to futoshiki game')
@@ -54,6 +86,8 @@ def run_cli(board):
         option = input(menu_options + prompt)
         if option == 'n':
             game(board)
+        if option == 's':
+            solve()
         elif option == 'q':
             running = False
         else:

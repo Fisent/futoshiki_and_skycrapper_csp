@@ -39,12 +39,12 @@ class Solution:
         return x, y
 
     def solve_step(self, x, y):
-        print('Step for x: ' + str(x) + ', y: ' + str(y))
-        print('Board state: ' + str(self.board.matrix))
+        # print('Step for x: ' + str(x) + ', y: ' + str(y))
+        # print('Board state: ' + str(self.board.matrix))
         inc_x, inc_y = self.increment_indexes(x, y)
 
         for value in self.domains_matrix[x][y]:
-            print('    value: ' + str(value))
+            # print('    value: ' + str(value))
             move_made = self.board.make_move(x, y, value)
 
             if inc_x is not -1 and inc_y is not -1 and move_made:
