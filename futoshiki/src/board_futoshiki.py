@@ -84,6 +84,7 @@ class BoardFutoshiki:
 
     def make_move(self, x, y, value):
         valid = self.is_move_valid(x, y, value)
+        # print('\t\t\tmove x:' + str(x) + ' y:' + str(y) + ' value:' + str(value) + ' is valid:' + str(valid))
         if valid:
             self.moves_stack.append((x, y, self.matrix[x][y]))
             self.matrix[x][y] = value

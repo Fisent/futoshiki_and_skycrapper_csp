@@ -1,7 +1,7 @@
 from src import Constraint
 
 
-data_file_prefix = 'test_data/'
+data_file_prefix = 'futoshiki_test_data/'
 
 
 letter_to_index_map = {

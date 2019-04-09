@@ -4,17 +4,18 @@ from .solver import Solver
 
 menu_options = 'Select option:\n' \
                '\tn - new game\n' \
-               '\ts = solve with AI\n' \
+               '\tf = solve futoshiki with AI\n' \
+               '\ts - solve skycrapper with AI\n'\
                '\tq - quit\n'
 
 
 prompt = '> '
 
 
-# loading available boards from test_data folder
+# loading available boards from futoshiki_test_data folder
 boards = []
 
-for filename in listdir(getcwd() + '/test_data'):
+for filename in listdir(getcwd() + '/futoshiki_test_data'):
     problem = read_problem(filename)
     board = BoardFutoshiki(matrix=problem['matrix'], constraints=problem['constraints'], name=problem['name'])
     boards.append(board)
@@ -46,7 +47,7 @@ def list_boards():
     return out
 
 
-def game(board):
+def futoshiki_game(board):
     running = True
     while running:
         print_game_state(board)
@@ -69,14 +70,26 @@ def game(board):
                 return
 
 
-def solve():
+def print_state(solver, x, y):
+    print('Print state:')
+    print('\tx:' + str(x) + 'y:' + str(y))
+    print('\trecursion_depth' + str(solver.recursion_depth))
+    print('\tboard: ' + str(solver.board.matrix))
+
+
+def futoshiki_solve():
     option = int(input('Which board do you want to solve?\n' + list_boards() + prompt))
     list_boards()
     board = boards[option]
+    debug = input('Do you want to debug?' + prompt)
     solution = Solver(board=board)
+    if debug == 'y':
+        solution.debug_lambda = print_state
     results = solution.solve()
+    print('Found ' + str(len(results)) + ' solutions!')
     for result in results:
         print(repr(result))
+    print('kroki: ' + str(solution.counter))
 
 
 def run_cli(board):
@@ -85,9 +98,11 @@ def run_cli(board):
     while running:
         option = input(menu_options + prompt)
         if option == 'n':
-            game(board)
-        if option == 's':
-            solve()
+            futoshiki_game(board)
+        elif option == 'f':
+            futoshiki_solve()
+        elif option == 's':
+            print('Skycrapper not implemented yet')
         elif option == 'q':
             running = False
         else:

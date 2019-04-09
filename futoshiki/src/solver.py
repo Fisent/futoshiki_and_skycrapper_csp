@@ -1,4 +1,5 @@
 from copy import deepcopy
+from time import sleep
 
 
 class Solver:
@@ -19,11 +20,15 @@ class Solver:
                 if board_value is not 0:
                     self.domains_matrix[i][j] = [board_value]
 
-    def __init__(self, board):
+    def __init__(self, board, debug_lambda=None):
         self.board = board
         self.domains_matrix = self.create_domains_matrix()
         self.initially_remove_impossible_values_from_domains()
         self.results = []
+        # fields for debug
+        self.recursion_depth = 0
+        self.debug_lambda = debug_lambda
+        self.counter = 0
 
     def remove_value_from_domain(self, x, y, value):
         self.domains_matrix[x][y].remove(value)
@@ -39,22 +44,30 @@ class Solver:
         return x, y
 
     def solve_step(self, x, y):
-        # print('Step for x: ' + str(x) + ', y: ' + str(y))
-        # print('Board state: ' + str(self.board.matrix))
+        self.counter += 1
+        self.recursion_depth += 1
+        if self.debug_lambda is not None:
+            self.debug_lambda(self, x, y)
+            input('go')
         inc_x, inc_y = self.increment_indexes(x, y)
 
         for value in self.domains_matrix[x][y]:
-            # print('    value: ' + str(value))
+            # print('\t\ttrying value: ' + str(value))
+            old_value = self.board.matrix[x][y]
             move_made = self.board.make_move(x, y, value)
-
             if inc_x is not -1 and inc_y is not -1 and move_made:
                 self.solve_step(inc_x, inc_y)
 
-            if not move_made:
-                won = self.board.win_check()
-                if won:
-                    self.results.append(deepcopy(self.board.matrix))
+            won = self.board.win_check()
+            if won:
+                # print(self.board.matrix)
+                # input('===WON===')
+                self.results.append(deepcopy(self.board.matrix))
+
+            if move_made:
+                self.board.matrix[x][y] = old_value
         self.board.undo_move()
+        self.recursion_depth -= 1
 
     def solve(self):
         self.solve_step(0, 0)
