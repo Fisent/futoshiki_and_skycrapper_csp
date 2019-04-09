@@ -1,5 +1,5 @@
 import unittest
-from src import Board, Constraint
+from src import BoardFutoshiki, Constraint
 
 
 def create_board():
@@ -14,7 +14,7 @@ def create_board():
         Constraint(4, 4, 3, 4),
     ]
 
-    return Board(matrix, constraints)
+    return BoardFutoshiki(matrix, constraints)
 
 
 def create_simple_board():
@@ -22,7 +22,7 @@ def create_simple_board():
         [1, 0],
         [0, 0]
     ]
-    return Board(matrix, [])
+    return BoardFutoshiki(matrix, [])
 
 
 def create_expected_result_matrix():
@@ -71,14 +71,14 @@ class BoardTestCase(unittest.TestCase):
 
     def test_board_checks_win_condition_simple(self):
         matrix = simple_board_expected_result
-        solved_board = Board(matrix=matrix, constraints=[])
+        solved_board = BoardFutoshiki(matrix=matrix, constraints=[])
         unsolved_board = create_simple_board()
         self.assertFalse(unsolved_board.win_check())
         self.assertTrue(solved_board.win_check())
 
     def test_board_checks_win_condition(self):
         matrix = create_expected_result_matrix()
-        solved_board = Board(matrix=matrix, constraints=[])
+        solved_board = BoardFutoshiki(matrix=matrix, constraints=[])
         unsolved_board = create_board()
         self.assertFalse(unsolved_board.win_check())
         self.assertTrue(solved_board.win_check())

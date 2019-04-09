@@ -1,5 +1,5 @@
 import unittest
-from src import Board, Constraint, Solution
+from src import BoardFutoshiki, Constraint, Solver
 
 
 def create_board_5():
@@ -14,7 +14,7 @@ def create_board_5():
         Constraint(4, 4, 3, 4),
     ]
 
-    return Board(matrix, constraints)
+    return BoardFutoshiki(matrix, constraints)
 
 
 def create_board_3():
@@ -28,7 +28,7 @@ def create_board_3():
         Constraint(0, 0, 1, 0)
     ]
 
-    return Board(matrix, constraints)
+    return BoardFutoshiki(matrix, constraints)
 
 
 def create_simple_board():
@@ -36,24 +36,24 @@ def create_simple_board():
         [1, 0],
         [0, 0]
     ]
-    return Board(matrix, [])
+    return BoardFutoshiki(matrix, [])
 
 
 def create_solution_5():
     board = create_board_5()
-    solution = Solution(board)
+    solution = Solver(board)
     return solution
 
 
 def create_solution_3():
     board = create_board_3()
-    s = Solution(board)
+    s = Solver(board)
     return s
 
 
 def create_simple_solution():
     board = create_simple_board()
-    s = Solution(board)
+    s = Solver(board)
     return s
 
 

@@ -18,7 +18,7 @@ class Constraint:
         return 'Constraint: ' + field1 + ' must be lower than ' + field2
 
 
-class Board:
+class BoardFutoshiki:
     def __init__(self, matrix, constraints, name='bezimienny'):
         self.N = len(matrix)
         self.matrix = matrix

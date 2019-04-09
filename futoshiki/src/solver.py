@@ -1,7 +1,7 @@
 from copy import deepcopy
 
 
-class Solution:
+class Solver:
 
     def create_domains_matrix(self):
         domains_matrix = []

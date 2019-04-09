@@ -1,6 +1,6 @@
 from os import listdir, getcwd
-from src import read_problem, Board
-from .solution import Solution
+from src import read_problem, BoardFutoshiki
+from .solver import Solver
 
 menu_options = 'Select option:\n' \
                '\tn - new game\n' \
@@ -16,7 +16,7 @@ boards = []
 
 for filename in listdir(getcwd() + '/test_data'):
     problem = read_problem(filename)
-    board = Board(matrix=problem['matrix'], constraints=problem['constraints'], name=problem['name'])
+    board = BoardFutoshiki(matrix=problem['matrix'], constraints=problem['constraints'], name=problem['name'])
     boards.append(board)
 
 
@@ -73,7 +73,7 @@ def solve():
     option = int(input('Which board do you want to solve?\n' + list_boards() + prompt))
     list_boards()
     board = boards[option]
-    solution = Solution(board=board)
+    solution = Solver(board=board)
     results = solution.solve()
     for result in results:
         print(repr(result))
