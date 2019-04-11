@@ -89,7 +89,7 @@ class BoardFutoshiki:
             self.moves_stack.append((x, y, self.matrix[x][y]))
             self.matrix[x][y] = value
         if x is -1 and y is -1:
-            self.moves_stack.append(x, y, self.matrix[x][y])
+            self.moves_stack.append((x, y, self.matrix[x][y]))
         return valid
 
     def undo_move(self):

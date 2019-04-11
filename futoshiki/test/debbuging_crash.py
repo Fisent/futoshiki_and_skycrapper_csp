@@ -19,16 +19,16 @@ class DebbugingCrashTestCase(unittest.TestCase):
         solver = Solver(board)
         results = solver.solve()
     #
-    def test_result_of_solving_futoshiki_5_2(self):
-        problem = read_problem('futoshiki_5_2.txt')
-        board = BoardFutoshiki(matrix=problem['matrix'], constraints=problem['constraints'])
-        solver = Solver(board)
-        results = solver.solve()
-        print(results)
-
-    def test_result_of_solving_futoshiki_4_1(self):
-        problem = read_problem('futoshiki_4_1.txt')
-        board = BoardFutoshiki(matrix=problem['matrix'], constraints=problem['constraints'])
-        solver = Solver(board)
-        results = solver.solve()
+    # def test_result_of_solving_futoshiki_5_2(self):
+    #     problem = read_problem('futoshiki_5_2.txt')
+    #     board = BoardFutoshiki(matrix=problem['matrix'], constraints=problem['constraints'])
+    #     solver = Solver(board)
+    #     results = solver.solve()
+    #     print(results)
+    #
+    # def test_result_of_solving_futoshiki_4_1(self):
+    #     problem = read_problem('futoshiki_4_1.txt')
+    #     board = BoardFutoshiki(matrix=problem['matrix'], constraints=problem['constraints'])
+    #     solver = Solver(board)
+    #     results = solver.solve()
 

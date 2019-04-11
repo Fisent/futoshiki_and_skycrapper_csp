@@ -103,20 +103,20 @@ class SolutionTestCase(unittest.TestCase):
         self.assertTupleEqual(s.increment_indexes(0, 4), (1, 0))
         self.assertTupleEqual(s.increment_indexes(4, 4), (-1, -1))
 
-    def test_solution_solves_simple_board(self):
-        s = create_simple_solution()
-        results = s.solve()
-        self.assertListEqual(results[0], simple_board_expected_solution)
-
-    def test_solution_solves_board_5(self):
-        s = create_solution_5()
-        results = s.solve()
-        self.assertTrue(board_5_one_of_results in results)
-
-    def test_solution_solves_board_3(self):
-        s = create_solution_3()
-        results = s.solve()
-        self.assertTrue(board_3_one_of_results in results)
+    # def test_solution_solves_simple_board(self):
+    #     s = create_simple_solution()
+    #     results = s.solve()
+    #     self.assertListEqual(results[0], simple_board_expected_solution)
+    #
+    # def test_solution_solves_board_5(self):
+    #     s = create_solution_5()
+    #     results = s.solve()
+    #     self.assertTrue(board_5_one_of_results in results)
+    #
+    # def test_solution_solves_board_3(self):
+    #     s = create_solution_3()
+    #     results = s.solve()
+    #     self.assertTrue(board_3_one_of_results in results)
 
 if __name__ == '__main__':
     unittest.main()

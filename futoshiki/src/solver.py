@@ -64,6 +64,9 @@ class Solver:
                 # input('===WON===')
                 self.results.append(deepcopy(self.board.matrix))
 
+            if self.recursion_depth == 13:
+                self.a = 1
+
             if move_made:
                 self.board.matrix[x][y] = old_value
         self.board.undo_move()
