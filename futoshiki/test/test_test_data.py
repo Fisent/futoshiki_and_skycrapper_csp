@@ -3,9 +3,11 @@ import unittest
 from src import read_problem, BoardFutoshiki, Solver
 
 
+prefix = getcwd() + '/futoshiki_test_data/'
+
 
 def test_for_file(filename):
-    problem = read_problem(filename)
+    problem = read_problem(filename, prefix)
     board = BoardFutoshiki(problem['matrix'], problem['constraints'])
     solver = Solver(board)
     results = solver.solve()
@@ -16,12 +18,12 @@ def test_for_file(filename):
 filenames = []
 
 
-for file in listdir(getcwd() + '/futoshiki_test_data'):
+for file in listdir(prefix):
     filenames.append(file)
 
 
-class OfficialDataTestCase(unittest.TestCase):
+class TestDataCase(unittest.TestCase):
     pass
-    def test_all(self):
-        for file in filenames:
-            test_for_file(file)
+    # def test_all(self):
+    #     for file in filenames:
+    #         test_for_file(file)

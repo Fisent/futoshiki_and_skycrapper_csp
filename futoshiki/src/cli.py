@@ -1,4 +1,5 @@
 from os import listdir, getcwd
+import time
 from src import read_problem, BoardFutoshiki
 from .solver import Solver
 
@@ -15,8 +16,8 @@ prompt = '> '
 # loading available boards from futoshiki_test_data folder
 boards = []
 
-for filename in listdir(getcwd() + '/futoshiki_test_data'):
-    problem = read_problem(filename)
+for filename in listdir(getcwd() + '/futoshiki_official_data/'):
+    problem = read_problem(filename=filename, prefix= getcwd() + '/futoshiki_official_data/')
     board = BoardFutoshiki(matrix=problem['matrix'], constraints=problem['constraints'], name=problem['name'])
     boards.append(board)
 
@@ -47,27 +48,27 @@ def list_boards():
     return out
 
 
-def futoshiki_game(board):
-    running = True
-    while running:
-        print_game_state(board)
-        print('Select field')
-        try:
-            x, y = read_field()
-            value = read_value()
-            result = board.make_move(x, y, value)
-            if not result:
-                if not board.move_sanity_checks(x, y, value):
-                    print('Sanity checks not passed')
-                if not board.move_rows_cols_check(x, y, value):
-                    print('Rows columnts check not passed')
-                if not board.move_constraints_check(x, y, value):
-                    print('Constraints check not passed')
-                print('This move is illegal and will be ignored')
-        except:
-            decision = input('Wrong value, do you want to return to the menu?(y/n)' + prompt)
-            if decision == 'y':
-                return
+# def futoshiki_game(board):
+#     running = True
+#     while running:
+#         print_game_state(board)
+#         print('Select field')
+#         try:
+#             x, y = read_field()
+#             value = read_value()
+#             result = board.make_move(x, y, value)
+#             if not result:
+#                 if not board.move_sanity_checks(x, y, value):
+#                     print('Sanity checks not passed')
+#                 if not board.move_rows_cols_check(x, y, value):
+#                     print('Rows columnts check not passed')
+#                 if not board.move_constraints_check(x, y, value):
+#                     print('Constraints check not passed')
+#                 print('This move is illegal and will be ignored')
+#         except:
+#             decision = input('Wrong value, do you want to return to the menu?(y/n)' + prompt)
+#             if decision == 'y':
+#                 return
 
 
 def print_state(solver, x, y):
@@ -85,20 +86,24 @@ def futoshiki_solve():
     solution = Solver(board=board)
     if debug == 'y':
         solution.debug_lambda = print_state
+    start = time.time()
     results = solution.solve()
+    end = time.time()
+    print('Time: ' + str(end - start))
     print('Found ' + str(len(results)) + ' solutions!')
     for result in results:
         print(repr(result))
     print('kroki: ' + str(solution.counter))
 
 
-def run_cli(board):
+def run_cli():
     running = True
     print('Welcome to futoshiki game')
     while running:
         option = input(menu_options + prompt)
         if option == 'n':
-            futoshiki_game(board)
+            print('Temporarly not supported')
+            # futoshiki_game(board)
         elif option == 'f':
             futoshiki_solve()
         elif option == 's':

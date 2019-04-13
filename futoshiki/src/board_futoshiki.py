@@ -1,4 +1,5 @@
 
+
 # this constraint means that field x_1,y_1 is lower than x_2,y_2
 class Constraint:
     def __init__(self, x_1: int, y_1: int, x_2: int, y_2: int):

@@ -1,5 +1,5 @@
 from src import Constraint
-
+from os import getcwd
 
 data_file_prefix = 'futoshiki_test_data/'
 
@@ -12,19 +12,24 @@ letter_to_index_map = {
     'E': 4,
     'F': 5,
     'G': 6,
-    'H': 7
+    'H': 7,
+    'I': 8,
+    'J': 9,
+    'K': 10
 }
 
 
 def symbol_to_indexes(symbol):
     letter = symbol[0]
-    number = int(symbol[1]) -1
+    number = int(symbol[1]) - 1
     return number, letter_to_index_map[letter]
 
 
 # returns dict with keys: N, matrix, constraints
-def read_problem(filename):
-    f = open(data_file_prefix + filename)
+def read_problem(filename, prefix=''):
+    if prefix == '':
+        prefix = data_file_prefix
+    f = open(prefix + filename)
     N = int(f.readline())
 
     if f.readline() != 'START:\n':

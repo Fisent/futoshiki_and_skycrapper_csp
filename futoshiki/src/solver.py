@@ -46,6 +46,8 @@ class Solver:
     def solve_step(self, x, y):
         self.counter += 1
         self.recursion_depth += 1
+        if self.counter % 100000 is 0:
+            print(self.counter)
         if self.debug_lambda is not None:
             self.debug_lambda(self, x, y)
             input('go')
