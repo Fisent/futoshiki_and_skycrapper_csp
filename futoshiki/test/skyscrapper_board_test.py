@@ -26,3 +26,7 @@ class SkyscrapperBoardCase(unittest.TestCase):
         board = create_board()
         self.assertFalse(board.move_rows_cols_check(0, 1, 1))
         self.assertTrue(board.move_rows_cols_check(0, 1, 2))
+
+    def test_board_constraint_check(self):
+        pass
+        # TODO
