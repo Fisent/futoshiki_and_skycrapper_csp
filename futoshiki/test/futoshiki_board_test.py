@@ -46,9 +46,9 @@ class BoardTestCase(unittest.TestCase):
 
     def test_board_move_sanity_checks(self):
         board = create_board()
-        self.assertFalse(board.move_sanity_checks(15, 15, 1))
-        self.assertTrue(board.move_sanity_checks(1, 1, 1))
-        self.assertFalse(board.move_sanity_checks(1, 1, 15))
+        self.assertFalse(board.move_sanity_check(15, 15, 1))
+        self.assertTrue(board.move_sanity_check(1, 1, 1))
+        self.assertFalse(board.move_sanity_check(1, 1, 15))
 
     def test_board_move_rows_cols_checks(self):
         board = create_board()
@@ -91,9 +91,6 @@ class BoardTestCase(unittest.TestCase):
         board.make_move(4, 0, 1)
         board.undo_move()
         self.assertEqual(board.matrix[4][0], 5)
-
-    def test_board_solves_problem(self):
-        pass
 
 
 if __name__ == '__main__':

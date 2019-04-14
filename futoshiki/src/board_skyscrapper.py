@@ -1,4 +1,5 @@
 from enum import Enum
+from .board import Board
 
 
 # This constraint means that from direction 'direction' there should be visible N buildings
@@ -24,7 +25,6 @@ def create_N_N_matrix(N):
             row.append(0)
         matrix.append(row)
     return matrix
-
 
 
 class ConstraintSkyscrapper:
@@ -53,12 +53,10 @@ class ConstraintSkyscrapper:
         return 'Skyscrapper constraints, direction:  ' + str(self.direction) + ', index:' + str(self.index)  +', no of visible buildings: ' + str(self.N)
 
 
-class BoardSkyscrapper:
+class BoardSkyscrapper(Board):
 
     def __init__(self, N, constraints):
         self.N = N
         self.matrix = create_N_N_matrix(N)
         self.constraints = constraints
 
-    def move_sanity_check(self, x, y, value):
-        pass

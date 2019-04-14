@@ -17,8 +17,6 @@ expected_constraints_skyscrapper_4_0 = [
 ]
 
 
-
-
 class ReadSkyscrapperTestCase(unittest.TestCase):
 
     def test_read_N_skyscrapper_4_0(self):
@@ -27,5 +25,4 @@ class ReadSkyscrapperTestCase(unittest.TestCase):
 
     def test_read_constraints_skyscrapper_4_0(self):
         problem = read_skyscrapper_problem(filename='skyscrapper_4_0.txt')
-        expected = expected_constraints_skyscrapper_4_0
         self.assertListEqual(expected_constraints_skyscrapper_4_0, problem['constraints'])

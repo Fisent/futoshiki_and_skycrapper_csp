@@ -2,6 +2,6 @@ from .futoshiki_board_test import BoardTestCase
 from .read_futoshiki_test import ReadFutoshikiTestCase
 from .solution_test import SolutionTestCase
 from .debbuging_crash import DebbugingCrashTestCase
-from .test_test_data import TestDataCase
+from .test_data_test import TestDataCase
 from .skyscrapper_board_test import SkyscrapperBoardCase
 from .read_skyscrapper_test import ReadSkyscrapperTestCase
