@@ -1,13 +1,13 @@
 from os import listdir, getcwd
 import unittest
-from src import read_problem, BoardFutoshiki, Solver
+from src import read_futoshiki_problem, BoardFutoshiki, Solver
 
 
 prefix = getcwd() + '/futoshiki_test_data/'
 
 
 def test_for_file(filename):
-    problem = read_problem(filename, prefix)
+    problem = read_futoshiki_problem(filename, prefix)
     board = BoardFutoshiki(problem['matrix'], problem['constraints'])
     solver = Solver(board)
     results = solver.solve()

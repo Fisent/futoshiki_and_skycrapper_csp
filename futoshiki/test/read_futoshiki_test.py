@@ -1,11 +1,11 @@
 import unittest
-from src import read_problem, Constraint, symbol_to_indexes
+from src import read_futoshiki_problem, Constraint, symbol_to_indexes
 
 
 filename = 'futoshiki_4_0.txt'
 
 
-class ReadTestCase(unittest.TestCase):
+class ReadFutoshikiTestCase(unittest.TestCase):
     def test_symbol_to_indexes_simple(self):
         symbol = 'A1'
         result = symbol_to_indexes(symbol)
@@ -19,7 +19,7 @@ class ReadTestCase(unittest.TestCase):
         self.assertEqual(result[1], 1)
 
     def test_read_N(self):
-        result = read_problem(filename)
+        result = read_futoshiki_problem(filename)
         self.assertEqual(result['N'], 4)
 
     def test_read_matrix(self):
@@ -29,12 +29,12 @@ class ReadTestCase(unittest.TestCase):
             [2, 0, 0, 0],
             [4, 0, 0, 0]
         ]
-        result = read_problem(filename)
+        result = read_futoshiki_problem(filename)
         self.assertEqual(result['matrix'], expected_matrix)
 
     def test_read_constraints(self):
         expected_constraints = [Constraint(x_1=3, y_1=3, x_2=3, y_2=2)]
-        result = read_problem(filename)
+        result = read_futoshiki_problem(filename)
         self.assertListEqual(result['constraints'], expected_constraints)
 
 

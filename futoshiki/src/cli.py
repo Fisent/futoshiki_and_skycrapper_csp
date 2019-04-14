@@ -1,6 +1,6 @@
 from os import listdir, getcwd
 import time
-from src import read_problem, BoardFutoshiki
+from src import read_futoshiki_problem, BoardFutoshiki
 from .solver import Solver
 
 menu_options = 'Select option:\n' \
@@ -17,7 +17,7 @@ prompt = '> '
 boards = []
 
 for filename in listdir(getcwd() + '/futoshiki_official_data/'):
-    problem = read_problem(filename=filename, prefix= getcwd() + '/futoshiki_official_data/')
+    problem = read_futoshiki_problem(filename=filename, prefix=getcwd() + '/futoshiki_official_data/')
     board = BoardFutoshiki(matrix=problem['matrix'], constraints=problem['constraints'], name=problem['name'])
     boards.append(board)
 

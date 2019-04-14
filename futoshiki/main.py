@@ -1,6 +1,6 @@
 from src import run_cli
 from src import BoardFutoshiki
-from src import read_problem
+from src import read_futoshiki_problem
 
 
 def main_cli():

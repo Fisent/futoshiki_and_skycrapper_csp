@@ -26,7 +26,7 @@ def symbol_to_indexes(symbol):
 
 
 # returns dict with keys: N, matrix, constraints
-def read_problem(filename, prefix=''):
+def read_futoshiki_problem(filename, prefix=''):
     if prefix == '':
         prefix = data_file_prefix
     f = open(prefix + filename)
