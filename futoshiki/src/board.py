@@ -22,3 +22,13 @@ class Board:
 
     def move_rows_cols_check(self, x, y, value):
         return not self.is_value_in_row_(x=x, value=value) and not self.is_value_in_col_(y=y, value=value)
+
+    def move_constraints_check(self, x, y, value):
+        old_value = self.matrix[x][y]
+        self.matrix[x][y] = value
+        result = True
+        for con in self.constraints:
+            result = result and self.check_constraint(con)
+        self.matrix[x][y] = old_value
+        return result
+

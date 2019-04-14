@@ -27,6 +27,16 @@ def create_N_N_matrix(N):
     return matrix
 
 
+def how_many_visible(array):
+    counter = 0
+    max_height = 0
+    for element in array:
+        if element > max_height:
+            counter += 1
+            max_height = element
+    return counter
+
+
 class ConstraintSkyscrapper:
 
     def parse_direction(self, direction):
@@ -60,3 +70,23 @@ class BoardSkyscrapper(Board):
         self.matrix = create_N_N_matrix(N)
         self.constraints = constraints
 
+    def get_col(self, index):
+        col = []
+        for row in self.matrix:
+            col.append(row[index])
+        return col
+
+    def check_constraint(self, constraint):
+        array = []
+        if constraint.direction == Direction.up:
+            array = self.get_col(constraint.index).copy()
+        elif constraint.direction == Direction.down:
+            array = self.get_col(constraint.index).copy()
+            array.reverse()
+        elif constraint.direction == Direction.left:
+            array = self.matrix[constraint.index].copy()
+        elif constraint.direction == Direction.right:
+            array = self.matrix[constraint.index].copy()
+            array.reverse()
+        no_of_visible_buildings = how_many_visible(array)
+        return no_of_visible_buildings == constraint.N

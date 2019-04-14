@@ -39,15 +39,6 @@ class BoardFutoshiki(Board):
         higher_value = self.matrix[constraint.x_2][constraint.y_2]
         return lower_value == 0 or higher_value == 0 or (lower_value < higher_value)
 
-    def move_constraints_check(self, x, y, value):
-        old_value = self.matrix[x][y]
-        self.matrix[x][y] = value
-        result = True
-        for con in self.constraints:
-            result = result and self.check_constraint(con)
-        self.matrix[x][y] = old_value
-        return result
-
     def is_move_valid(self, x, y, value):
         sanity = self.move_sanity_check(x, y, value)
         rows_cols = self.move_rows_cols_check(x, y, value)
