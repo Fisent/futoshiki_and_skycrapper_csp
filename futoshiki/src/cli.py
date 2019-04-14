@@ -16,8 +16,8 @@ prompt = '> '
 # loading available boards from futoshiki_test_data folder
 boards = []
 
-for filename in listdir(getcwd() + '/futoshiki_official_data/'):
-    problem = read_futoshiki_problem(filename=filename, prefix=getcwd() + '/futoshiki_official_data/')
+for filename in listdir(getcwd() + '/futoshiki_test_data/'):
+    problem = read_futoshiki_problem(filename=filename, prefix=getcwd() + '/futoshiki_test_data/')
     board = BoardFutoshiki(matrix=problem['matrix'], constraints=problem['constraints'], name=problem['name'])
     boards.append(board)
 
@@ -70,22 +70,11 @@ def list_boards():
 #             if decision == 'y':
 #                 return
 
-
-def print_state(solver, x, y):
-    print('Print state:')
-    print('\tx:' + str(x) + 'y:' + str(y))
-    print('\trecursion_depth' + str(solver.recursion_depth))
-    print('\tboard: ' + str(solver.board.matrix))
-
-
 def futoshiki_solve():
     option = int(input('Which board do you want to solve?\n' + list_boards() + prompt))
     list_boards()
     board = boards[option]
-    debug = input('Do you want to debug?' + prompt)
     solution = Solver(board=board)
-    if debug == 'y':
-        solution.debug_lambda = print_state
     start = time.time()
     results = solution.solve()
     end = time.time()

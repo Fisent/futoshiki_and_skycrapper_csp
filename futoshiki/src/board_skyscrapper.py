@@ -69,6 +69,7 @@ class BoardSkyscrapper(Board):
         self.N = N
         self.matrix = create_N_N_matrix(N)
         self.constraints = constraints
+        self.moves_stack = []
 
     def get_col(self, index):
         col = []

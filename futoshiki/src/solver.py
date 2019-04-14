@@ -46,28 +46,19 @@ class Solver:
     def solve_step(self, x, y):
         self.counter += 1
         self.recursion_depth += 1
-        if self.counter % 100000 is 0:
-            print(self.counter)
-        if self.debug_lambda is not None:
-            self.debug_lambda(self, x, y)
-            input('go')
         inc_x, inc_y = self.increment_indexes(x, y)
 
         for value in self.domains_matrix[x][y]:
-            # print('\t\ttrying value: ' + str(value))
+            current_domain_matrix = self.domains_matrix[x][y]
             old_value = self.board.matrix[x][y]
             move_made = self.board.make_move(x, y, value)
+
             if inc_x is not -1 and inc_y is not -1 and move_made:
                 self.solve_step(inc_x, inc_y)
-
-            won = self.board.win_check()
-            if won:
-                # print(self.board.matrix)
-                # input('===WON===')
-                self.results.append(deepcopy(self.board.matrix))
-
-            if self.recursion_depth == 13:
-                self.a = 1
+            elif inc_x is -1 and inc_y is -1:
+                won = self.board.win_check()
+                if won:
+                    self.results.append(deepcopy(self.board.matrix))
 
             if move_made:
                 self.board.matrix[x][y] = old_value
@@ -76,4 +67,5 @@ class Solver:
 
     def solve(self):
         self.solve_step(0, 0)
+
         return self.results

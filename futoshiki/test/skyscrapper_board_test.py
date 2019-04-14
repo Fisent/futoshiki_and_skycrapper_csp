@@ -28,7 +28,6 @@ class SkyscrapperBoardCase(unittest.TestCase):
         with self.assertRaises(Exception):
             c1 = ConstraintSkyscrapper(direction='DUPA', index=0, N=0)
         c2 = ConstraintSkyscrapper('D', index=0, N=1)
-        print(c2)
 
     def test_board_sanity_check(self):
         board = create_board()
@@ -47,18 +46,18 @@ class SkyscrapperBoardCase(unittest.TestCase):
         self.assertListEqual(board.get_col(1), [2, 3, 1])
         self.assertListEqual(board.get_col(2), [3, 1, 0])
 
-    # def test_how_many_visible(self):
-    #     one_visible = [3, 2, 1]
-    #     two_visible = [2, 3, 1]
-    #     three_visible = [1, 2, 3]
-    #     one_visible_long = [7, 4, 2, 1, 3, 5, 6]
-    #     three_visible_long = [3, 1, 4, 7, 2, 5, 6]
-    #
-    #     self.assertEqual(how_many_visible(one_visible), 1)
-    #     self.assertEqual(how_many_visible(two_visible), 2)
-    #     self.assertEqual(how_many_visible(three_visible), 3)
-    #     self.assertEqual(how_many_visible(one_visible_long), 1)
-    #     self.assertEqual(how_many_visible(three_visible_long), 3)
+    def test_how_many_visible(self):
+        one_visible = [3, 2, 1]
+        two_visible = [2, 3, 1]
+        three_visible = [1, 2, 3]
+        one_visible_long = [7, 4, 2, 1, 3, 5, 6]
+        three_visible_long = [3, 1, 4, 7, 2, 5, 6]
+
+        self.assertEqual(how_many_visible(one_visible), 1)
+        self.assertEqual(how_many_visible(two_visible), 2)
+        self.assertEqual(how_many_visible(three_visible), 3)
+        self.assertEqual(how_many_visible(one_visible_long), 1)
+        self.assertEqual(how_many_visible(three_visible_long), 3)
 
     def test_board_constraint_check(self):
         constraint_pass = ConstraintSkyscrapper(direction='L', index=0, N=3)
@@ -88,3 +87,19 @@ class SkyscrapperBoardCase(unittest.TestCase):
 
         board_for_val_1 = create_board_to_check_constraints(constraints=constraints_for_value_1)
         self.assertTrue(board_for_val_1.move_constraints_check(2, 2, 3))
+
+    def test_board_make_move(self):
+        matrix_after_move = [
+            [1, 2, 3],
+            [2, 3, 1],
+            [3, 1, 2]
+        ]
+
+        constraints_for_value_2 = [
+            ConstraintSkyscrapper(direction='P', index=2, N=2),
+            ConstraintSkyscrapper(direction='D', index=2, N=2)
+        ]
+
+        board = create_board_to_check_constraints(constraints=constraints_for_value_2)
+        board.make_move(2, 2, 2)
+        self.assertListEqual(matrix_after_move, board.matrix)

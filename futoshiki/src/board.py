@@ -32,3 +32,32 @@ class Board:
         self.matrix[x][y] = old_value
         return result
 
+    def is_move_valid(self, x, y, value):
+        sanity = self.move_sanity_check(x, y, value)
+        rows_cols = self.move_rows_cols_check(x, y, value)
+        constraints = self.move_constraints_check(x, y, value)
+        return sanity and rows_cols and constraints or self.matrix[x][y] is value
+
+    def win_check(self):
+        won = True
+        for row in self.matrix:
+            for value in row:
+                if value is 0:
+                    won = False
+        return won
+
+    def make_move(self, x, y, value):
+        valid = self.is_move_valid(x, y, value)
+        # print('\t\t\tmove x:' + str(x) + ' y:' + str(y) + ' value:' + str(value) + ' is valid:' + str(valid))
+        if valid:
+            self.moves_stack.append((x, y, self.matrix[x][y]))
+            self.matrix[x][y] = value
+        if x is -1 and y is -1:
+            self.moves_stack.append((x, y, self.matrix[x][y]))
+        return valid
+
+    def undo_move(self):
+        # print('undo move')
+        if len(self.moves_stack) is not 0:
+            x, y, value = self.moves_stack.pop()
+            self.matrix[x][y] = value
