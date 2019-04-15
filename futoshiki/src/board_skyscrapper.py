@@ -65,7 +65,8 @@ class ConstraintSkyscrapper:
 
 class BoardSkyscrapper(Board):
 
-    def __init__(self, N, constraints):
+    def __init__(self, N, constraints, name='bezimienny'):
+        self.name = name
         self.N = N
         self.matrix = create_N_N_matrix(N)
         self.constraints = constraints
@@ -89,5 +90,7 @@ class BoardSkyscrapper(Board):
         elif constraint.direction == Direction.right:
             array = self.matrix[constraint.index].copy()
             array.reverse()
+        if 0 in array:
+            return True
         no_of_visible_buildings = how_many_visible(array)
         return no_of_visible_buildings == constraint.N

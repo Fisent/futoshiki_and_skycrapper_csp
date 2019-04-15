@@ -20,14 +20,13 @@ class Solver:
                 if board_value is not 0:
                     self.domains_matrix[i][j] = [board_value]
 
-    def __init__(self, board, debug_lambda=None):
+    def __init__(self, board):
         self.board = board
         self.domains_matrix = self.create_domains_matrix()
         self.initially_remove_impossible_values_from_domains()
         self.results = []
         # fields for debug
         self.recursion_depth = 0
-        self.debug_lambda = debug_lambda
         self.counter = 0
 
     def remove_value_from_domain(self, x, y, value):
@@ -45,6 +44,8 @@ class Solver:
 
     def solve_step(self, x, y):
         self.counter += 1
+        if self.counter % 1000000 == 0:
+            print(self.counter)
         self.recursion_depth += 1
         inc_x, inc_y = self.increment_indexes(x, y)
 

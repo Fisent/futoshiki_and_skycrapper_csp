@@ -1,6 +1,6 @@
 from os import listdir, getcwd
 import time
-from src import read_futoshiki_problem, BoardFutoshiki
+from src import read_futoshiki_problem, BoardFutoshiki, read_skyscrapper_problem, BoardSkyscrapper
 from .solver import Solver
 
 menu_options = 'Select option:\n' \
@@ -13,13 +13,20 @@ menu_options = 'Select option:\n' \
 prompt = '> '
 
 
-# loading available boards from futoshiki_test_data folder
-boards = []
-
-for filename in listdir(getcwd() + '/futoshiki_test_data/'):
-    problem = read_futoshiki_problem(filename=filename, prefix=getcwd() + '/futoshiki_test_data/')
-    board = BoardFutoshiki(matrix=problem['matrix'], constraints=problem['constraints'], name=problem['name'])
-    boards.append(board)
+def get_boards(folder_name):
+    boards = []
+    for filename in listdir(getcwd() + '/' + folder_name + '/'):
+        if 'futoshiki' in folder_name:
+            problem = read_futoshiki_problem(filename=filename, prefix=getcwd() + '/' + folder_name + '/')
+            board = BoardFutoshiki(matrix=problem['matrix'], constraints=problem['constraints'], name=problem['name'])
+            boards.append(board)
+        elif 'skyscrapper' in folder_name:
+            problem = read_skyscrapper_problem(filename=filename, prefix=getcwd() + '/' + folder_name + '/')
+            board = BoardSkyscrapper(N=problem['N'], constraints=problem['constraints'], name=problem['name'])
+            boards.append(board)
+        else:
+            print('WARNING! there is no such game')
+    return boards
 
 
 def read_field():
@@ -39,7 +46,8 @@ def print_game_state(board):
         print(repr(c))
 
 
-def list_boards():
+def list_boards(folder):
+    boards = get_boards(folder)
     out = ''
     if range(len(boards)) is 0:
         print('Warning! There are no available boards!')
@@ -70,9 +78,10 @@ def list_boards():
 #             if decision == 'y':
 #                 return
 
-def futoshiki_solve():
-    option = int(input('Which board do you want to solve?\n' + list_boards() + prompt))
-    list_boards()
+
+def solve(folder_name):
+    boards = get_boards(folder_name)
+    option = int(input('Which board do you want to solve?\n' + list_boards(folder_name) + prompt))
     board = boards[option]
     solution = Solver(board=board)
     start = time.time()
@@ -94,9 +103,9 @@ def run_cli():
             print('Temporarly not supported')
             # futoshiki_game(board)
         elif option == 'f':
-            futoshiki_solve()
+            solve('futoshiki_test_data')
         elif option == 's':
-            print('Skycrapper not implemented yet')
+            solve('skyscrapper_test_data')
         elif option == 'q':
             running = False
         else:

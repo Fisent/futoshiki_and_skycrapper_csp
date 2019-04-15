@@ -17,11 +17,12 @@ def read_skyscrapper_problem(filename, prefix=''):
         for i in range(1, N + 1):
             value = int(tab[i])
             if value != 0:
-                constraints.append(ConstraintSkyscrapper(direction=tab[0], index=i, N=value))
+                constraints.append(ConstraintSkyscrapper(direction=tab[0], index=i - 1, N=value))
 
 
     f.close()
     return {
         'N': N,
-        'constraints': constraints
+        'constraints': constraints,
+        'name': filename
     }
